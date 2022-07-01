@@ -145,7 +145,7 @@ function InitMnemonicSeedPage() {
                                         case 1:
                                             decodedKeyResult = _a.sent();
                                             if (decodedKeyResult.type === "err") {
-                                                ShowError("Invalid BIP32 key: " + decodedKeyResult.error);
+                                                ShowError("Invalid BIP32 key: ".concat(decodedKeyResult.error));
                                                 return [2 /*return*/, null];
                                             }
                                             SetPresetsForExtendedKey();
@@ -172,7 +172,7 @@ function InitMnemonicSeedPage() {
                                         case 3:
                                             result = _a.sent();
                                             if (result.type === "err") {
-                                                ShowError("Invalid mnemonic seed: " + result.error);
+                                                ShowError("Invalid mnemonic seed: ".concat(result.error));
                                                 return [2 /*return*/, null];
                                             }
                                             SetPresetsForMnemonicSeed();
@@ -272,7 +272,7 @@ function InitMnemonicSeedPage() {
                 seedResultsAddressesContainerDiv.style.display = "none";
             }
             function UpdateProgress() {
-                calculateProgressDiv.textContent = "Calculating: " + currentProgress++ + "/" + count;
+                calculateProgressDiv.textContent = "Calculating: ".concat(currentProgress++, "/").concat(count);
             }
             function CreateRow(path, address, privateKey) {
                 var row = document.createElement("div");

@@ -91,7 +91,7 @@ window.addEventListener("load", function () { return __awaiter(void 0, void 0, v
                                     testRunningDiv_1.style.display = "flex";
                                     testDoneDiv_1.style.display = "none";
                                     return [4 /*yield*/, RunTests_1(function (current, total) {
-                                            testRunningProgress_1.textContent = current + "/" + total;
+                                            testRunningProgress_1.textContent = "".concat(current, "/").concat(total);
                                         })];
                                 case 1:
                                     failedTestMessages = _a.sent();
@@ -101,7 +101,7 @@ window.addEventListener("load", function () { return __awaiter(void 0, void 0, v
                                         testResultTextDiv_1.textContent = "All tests OK!";
                                     }
                                     else {
-                                        testResultTextDiv_1.textContent = failedTestMessages.length + " test" + (failedTestMessages.length === 1 ? "" : "s") + " failed! Please report this issue! Check the developer console for details.";
+                                        testResultTextDiv_1.textContent = "".concat(failedTestMessages.length, " test").concat(failedTestMessages.length === 1 ? "" : "s", " failed! Please report this issue! Check the developer console for details.");
                                         failedTestMessages.forEach(console.error);
                                     }
                                     return [2 /*return*/];

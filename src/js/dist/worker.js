@@ -113,10 +113,10 @@ var CreateWorkers = function () {
     }
     else {
         var CreateSources = function () {
-            return sources.map(function (source) { return "var " + source.functionName + " = " + source.fn.toString() + ";"; }).join("\n\n") + "\n";
+            return sources.map(function (source) { return "var ".concat(source.functionName, " = ").concat(source.fn.toString(), ";"); }).join("\n\n") + "\n";
         };
         var InitializeSources = function () {
-            return sources.map(function (source) { return "" + ("" + ((source.variableName !== undefined) ? "var " + source.variableName + " = " : "")) + source.functionName + "();"; }).join("\n");
+            return sources.map(function (source) { return "".concat("".concat((source.variableName !== undefined) ? "var ".concat(source.variableName, " = ") : "")).concat(source.functionName, "();"); }).join("\n");
         };
         var WorkerCreatorFunction = function () {
             addEventListener("message", function (message) {
@@ -129,7 +129,7 @@ var CreateWorkers = function () {
                 postMessage(result, undefined);
             });
         };
-        var blobContents = ["\n\n// typescript array spread transformation\nvar __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {\n    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {\n        if (ar || !(i in from)) {\n            if (!ar) ar = Array.prototype.slice.call(from, 0, i);\n            ar[i] = from[i];\n        }\n    }\n    return to.concat(ar || Array.prototype.slice.call(from));\n};\n\n" + CreateSources() + "\n\n" + InitializeSources() + "\n\n(\n" + WorkerCreatorFunction.toString() + "\n)();"
+        var blobContents = ["\n\n// typescript array spread transformation\nvar __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {\n    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {\n        if (ar || !(i in from)) {\n            if (!ar) ar = Array.prototype.slice.call(from, 0, i);\n            ar[i] = from[i];\n        }\n    }\n    return to.concat(ar || Array.prototype.slice.call(from));\n};\n\n".concat(CreateSources(), "\n\n").concat(InitializeSources(), "\n\n(\n").concat(WorkerCreatorFunction.toString(), "\n)();")
         ];
         var blob = new Blob(blobContents, { type: "application/javascript" });
         var blobUrl = URL.createObjectURL(blob);

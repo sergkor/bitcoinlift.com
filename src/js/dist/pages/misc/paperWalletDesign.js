@@ -26,7 +26,7 @@ function GetPaperWalletDesign(designName, isBIP38) {
                         size: 100
                     }],
                 privateKeyQRCodes: [{
-                        anchor: 3 /* BottomRight */,
+                        anchor: 3 /* PaperWalletElementAnchor.BottomRight */,
                         position: { x: 10, y: 10 },
                         size: 100
                     }],
@@ -35,7 +35,7 @@ function GetPaperWalletDesign(designName, isBIP38) {
                         size: 18
                     }],
                 privateKeyTexts: [{
-                        anchor: 3 /* BottomRight */,
+                        anchor: 3 /* PaperWalletElementAnchor.BottomRight */,
                         position: { x: 120, y: 10 },
                         size: 18
                     }],
@@ -50,7 +50,7 @@ function GetPaperWalletDesign(designName, isBIP38) {
                         text: isBIP38 ? "Encrypted private key:" : "Private key:",
                         fontFamily: "Verdana",
                         bold: true,
-                        anchor: 3 /* BottomRight */,
+                        anchor: 3 /* PaperWalletElementAnchor.BottomRight */,
                         position: { x: isBIP38 ? 431 : 514, y: 40 },
                         size: 25
                     }

@@ -56,26 +56,26 @@ function InitCustomPaperWalletDesign() {
     }
     function UpdatePreview() {
         var backgroundImageScale = parameters["backgroundImageScale"];
-        previewContainer.style.width = backgroundImageSize.x * backgroundImageScale / 100 + "px";
-        previewContainer.style.height = backgroundImageSize.y * backgroundImageScale / 100 + "px";
+        previewContainer.style.width = "".concat(backgroundImageSize.x * backgroundImageScale / 100, "px");
+        previewContainer.style.height = "".concat(backgroundImageSize.y * backgroundImageScale / 100, "px");
         previewAddress.style.left = parameters["addressPositionX"] + "px";
         previewAddress.style.top = parameters["addressPositionY"] + "px";
         previewAddress.style.fontSize = parameters["addressFontSize"] + "px";
         previewAddress.textContent = SplitTextIntoLines(dummyAddress, parameters["addressLettersPerLine"]).join("\n");
-        previewAddress.style.transform = "rotate(" + parameters["addressRotation"] + "deg)";
+        previewAddress.style.transform = "rotate(".concat(parameters["addressRotation"], "deg)");
         previewPrivateKey.style.left = parameters["privateKeyPositionX"] + "px";
         previewPrivateKey.style.top = parameters["privateKeyPositionY"] + "px";
         previewPrivateKey.style.fontSize = parameters["privateKeyFontSize"] + "px";
         previewPrivateKey.textContent = SplitTextIntoLines(dummyPrivateKey, parameters["privateKeyLettersPerLine"]).join("\n");
-        previewPrivateKey.style.transform = "rotate(" + parameters["privateKeyRotation"] + "deg)";
+        previewPrivateKey.style.transform = "rotate(".concat(parameters["privateKeyRotation"], "deg)");
         previewAddressQR.style.left = parameters["addressQRPositionX"] + "px";
         previewAddressQR.style.top = parameters["addressQRPositionY"] + "px";
         previewAddressQR.style.width = previewAddress.style.height = parameters["addressQRSize"] + "px";
-        previewAddressQR.style.transform = "rotate(" + parameters["addressQRRotation"] + "deg)";
+        previewAddressQR.style.transform = "rotate(".concat(parameters["addressQRRotation"], "deg)");
         previewPrivateKeyQR.style.left = parameters["privateKeyQRPositionX"] + "px";
         previewPrivateKeyQR.style.top = parameters["privateKeyQRPositionY"] + "px";
         previewPrivateKeyQR.style.width = previewAddress.style.height = parameters["privateKeyQRSize"] + "px";
-        previewPrivateKeyQR.style.transform = "rotate(" + parameters["privateKeyQRRotation"] + "deg)";
+        previewPrivateKeyQR.style.transform = "rotate(".concat(parameters["privateKeyQRRotation"], "deg)");
     }
     function CreateLabelForInput(text, input) {
         var label = document.createElement("label");

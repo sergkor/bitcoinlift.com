@@ -100,7 +100,7 @@ var EntropyCanvas = (function () { return Lazy(function () {
                                         randomnessCanvasCTX.beginPath();
                                         randomnessCanvasCTX.arc(x, y, 4, 0, Math.PI * 2);
                                         randomnessCanvasCTX.fill();
-                                        randomnessText.textContent = "Move your mouse around here for randomness\n" + Math.floor(tempEntropy.length / maxRandomnessCount * 100) + "%";
+                                        randomnessText.textContent = "Move your mouse around here for randomness\n".concat(Math.floor(tempEntropy.length / maxRandomnessCount * 100), "%");
                                         tempEntropy.push(event.clientX + event.clientY * document.documentElement.clientWidth);
                                     }
                                 }

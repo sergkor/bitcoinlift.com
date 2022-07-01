@@ -78,7 +78,7 @@ function InitAddressDetailsPage() {
                             messageDiv.style.display = "";
                             privateKeyInfoContainer.style.display = "none";
                             privateKeyDetailsTextDiv.style.display = "none";
-                            messageDiv.textContent = "Invalid private key (" + result.message + ")";
+                            messageDiv.textContent = "Invalid private key (".concat(result.message, ")");
                             loading.hide();
                             return [2 /*return*/];
                         }
@@ -142,7 +142,7 @@ function InitAddressDetailsPage() {
                         decrypted = _a.sent();
                         if (decrypted.type === "err") {
                             messageDiv.style.display = "";
-                            messageDiv.textContent = "Cannot decrypt address (" + decrypted.error + ")";
+                            messageDiv.textContent = "Cannot decrypt address (".concat(decrypted.error, ")");
                             loading.hide();
                             return [2 /*return*/];
                         }

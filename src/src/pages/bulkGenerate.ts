@@ -25,6 +25,7 @@ function InitBulkGeneratePage()
 
     // generate related elements
     const bulkGenerateButton = <HTMLButtonElement>document.getElementById("bulk-generate-button");
+    const bulkValidateButton = <HTMLButtonElement>document.getElementById("bulk-validate-button");
     const bulkGenerateCountInput = <HTMLInputElement>document.getElementById("bulk-count");
     const resultTextArea = <HTMLTextAreaElement>document.getElementById("bulk-addresses");
 
@@ -115,4 +116,10 @@ function InitBulkGeneratePage()
     }
 
     bulkGenerateButton.addEventListener("click", AsyncNoParallel(BulkGenerate));
+
+    async function BulkValidate() {
+        alert('validating - still in progress...');
+
+    }
+    bulkValidateButton.addEventListener("click", AsyncNoParallel(BulkValidate));
 }

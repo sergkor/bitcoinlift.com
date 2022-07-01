@@ -59,7 +59,7 @@ function InitPaperWalletPage() {
     qrErrorCorrectionLevelMRadioButton.addEventListener("change", function () { return qrErrorCorrectionLevelMRadioButton.checked && SetQRErrorCorrectionLevel("M"); });
     qrErrorCorrectionLevelLRadioButton.addEventListener("change", function () { return qrErrorCorrectionLevelLRadioButton.checked && SetQRErrorCorrectionLevel("L"); });
     // generation type
-    var generationType = 0 /* RandomNew */;
+    var generationType = 0 /* PaperWalletGenerationType.RandomNew */;
     var generationTypeRandomNewRadioButton = document.getElementById("paper-radio-generation-type-random-new");
     var generationTypeUseExistingRadioButton = document.getElementById("paper-radio-generation-type-use-existing");
     var generationTypeFromSeedRadioButton = document.getElementById("paper-radio-generation-type-from-seed");
@@ -67,12 +67,12 @@ function InitPaperWalletPage() {
     var generationFromSeedDiv = document.getElementById("paper-div-generate-from-seed");
     function SetGenerationType(type) {
         generationType = type;
-        generationUseExistingDiv.style.display = type === 1 /* UseExisting */ ? "" : "none";
-        generationFromSeedDiv.style.display = type === 2 /* FromSeed */ ? "" : "none";
+        generationUseExistingDiv.style.display = type === 1 /* PaperWalletGenerationType.UseExisting */ ? "" : "none";
+        generationFromSeedDiv.style.display = type === 2 /* PaperWalletGenerationType.FromSeed */ ? "" : "none";
     }
-    generationTypeRandomNewRadioButton.addEventListener("change", function () { return generationTypeRandomNewRadioButton.checked && SetGenerationType(0 /* RandomNew */); });
-    generationTypeUseExistingRadioButton.addEventListener("change", function () { return generationTypeUseExistingRadioButton.checked && SetGenerationType(1 /* UseExisting */); });
-    generationTypeFromSeedRadioButton.addEventListener("change", function () { return generationTypeFromSeedRadioButton.checked && SetGenerationType(2 /* FromSeed */); });
+    generationTypeRandomNewRadioButton.addEventListener("change", function () { return generationTypeRandomNewRadioButton.checked && SetGenerationType(0 /* PaperWalletGenerationType.RandomNew */); });
+    generationTypeUseExistingRadioButton.addEventListener("change", function () { return generationTypeUseExistingRadioButton.checked && SetGenerationType(1 /* PaperWalletGenerationType.UseExisting */); });
+    generationTypeFromSeedRadioButton.addEventListener("change", function () { return generationTypeFromSeedRadioButton.checked && SetGenerationType(2 /* PaperWalletGenerationType.FromSeed */); });
     // bip38
     var bip38Checkbox = document.getElementById("bip38-enabled-paper");
     var bip38PasswordContainer = document.getElementById("bip38-password-box-div-paper");
@@ -115,13 +115,13 @@ function InitPaperWalletPage() {
                     return ["left", "top"];
                 }
                 switch (anchor) {
-                    case 0 /* TopLeft */:
+                    case 0 /* PaperWalletElementAnchor.TopLeft */:
                         return ["left", "top"];
-                    case 1 /* TopRight */:
+                    case 1 /* PaperWalletElementAnchor.TopRight */:
                         return ["right", "top"];
-                    case 2 /* BottomLeft */:
+                    case 2 /* PaperWalletElementAnchor.BottomLeft */:
                         return ["left", "bottom"];
-                    case 3 /* BottomRight */:
+                    case 3 /* PaperWalletElementAnchor.BottomRight */:
                         return ["right", "bottom"];
                 }
             }
@@ -134,10 +134,10 @@ function InitPaperWalletPage() {
                 img.style[horizontal] = transform.position.x + "px";
                 img.style[vertical] = transform.position.y + "px";
                 if (transform.rotation !== undefined) {
-                    img.style.transform = "rotate(" + transform.rotation + "deg)";
+                    img.style.transform = "rotate(".concat(transform.rotation, "deg)");
                 }
                 if (transform.rotationPivot !== undefined) {
-                    img.style.transformOrigin = transform.rotationPivot.x + "% " + transform.rotationPivot.y + "%";
+                    img.style.transformOrigin = "".concat(transform.rotationPivot.x, "% ").concat(transform.rotationPivot.y, "%");
                 }
                 return img;
             }
@@ -179,10 +179,10 @@ function InitPaperWalletPage() {
                 textDiv.style[horizontal] = properties.position.x + "px";
                 textDiv.style[vertical] = properties.position.y + "px";
                 if (properties.rotation !== undefined) {
-                    textDiv.style.transform = "rotate(" + properties.rotation + "deg)";
+                    textDiv.style.transform = "rotate(".concat(properties.rotation, "deg)");
                 }
                 if (properties.rotationPivot !== undefined) {
-                    textDiv.style.transformOrigin = properties.rotationPivot.x + "% " + properties.rotationPivot.y + "%";
+                    textDiv.style.transformOrigin = "".concat(properties.rotationPivot.x, "% ").concat(properties.rotationPivot.y, "%");
                 }
                 return textDiv;
             }
@@ -256,7 +256,7 @@ function InitPaperWalletPage() {
     function GeneratePaperWallets() {
         return __awaiter(this, void 0, void 0, function () {
             function UpdateProgress() {
-                progressTextDiv.textContent = "Generating: " + currentCount++ + "/" + count;
+                progressTextDiv.textContent = "Generating: ".concat(currentCount++, "/").concat(count);
             }
             function CreateDivFromAddressAndPrivateKey(address, privateKey) {
                 return __awaiter(this, void 0, void 0, function () {
@@ -301,9 +301,9 @@ function InitPaperWalletPage() {
                         results = [];
                         _a = generationType;
                         switch (_a) {
-                            case 0 /* RandomNew */: return [3 /*break*/, 1];
-                            case 1 /* UseExisting */: return [3 /*break*/, 5];
-                            case 2 /* FromSeed */: return [3 /*break*/, 6];
+                            case 0 /* PaperWalletGenerationType.RandomNew */: return [3 /*break*/, 1];
+                            case 1 /* PaperWalletGenerationType.UseExisting */: return [3 /*break*/, 5];
+                            case 2 /* PaperWalletGenerationType.FromSeed */: return [3 /*break*/, 6];
                         }
                         return [3 /*break*/, 9];
                     case 1:
@@ -478,7 +478,7 @@ function InitPaperWalletPage() {
                         }
                         rootKey = rootKeyResult.result;
                         purpose_1 = currentAddressType === "legacy" ? "44" : currentAddressType === "segwit" ? "49" : "84";
-                        basePath = "m/" + purpose_1 + "'/0'/0'";
+                        basePath = "m/".concat(purpose_1, "'/0'/0'");
                         return [4 /*yield*/, WorkerInterface.DeriveBIP32ExtendedKey(rootKey, basePath + (changeAddresses ? "/1" : "/0"), purpose_1, hardened_1)];
                     case 8:
                         derivedResult_1 = _c.sent();
@@ -553,7 +553,7 @@ function InitPaperWalletPage() {
                                 errorMessages.map(function (err) {
                                     var errorMessage = err[0];
                                     var privateKey = err[1];
-                                    return errorMessage + " (processing private key \"" + privateKey + "\")";
+                                    return "".concat(errorMessage, " (processing private key \"").concat(privateKey, "\")");
                                 }).join("\n"));
                         }
                         else {

@@ -48,14 +48,14 @@ body.light
 
 button
 {
-    background-color: #146dff;
+    background-color: #2a9612;
     border: none;
-    border-radius: 5px;
+    border-radius: 2px;
     color: #ffffff;
-    padding: 12px 25px 12px 25px;
-    margin: 5px 0px 5px 0px;
-    font-family: "Verdana";
-    font-size: 20px;
+    padding: 6px 12px 6px 12px;
+    margin: 2px 0px 2px 0px;
+    #font-family: "Verdana";
+    #font-size: 20px;
     cursor: pointer;
     width: 100%;
     transition: 0.15s;
@@ -63,13 +63,13 @@ button
 
 button:disabled
 {
-    background-color: #77abff;
+    background-color: #4ac632;
     cursor: not-allowed;
 }
 
 button:enabled:hover
 {
-    background-color: #54adff;
+    background-color: #5ad642;
 }
 
 input[type="text"], input[type="number"]
@@ -441,24 +441,24 @@ li
     </script>
 
     <div id="content" style="display: table; width: 100%;">
-        <div id="button-container" style="display: table-cell; padding-right: 10px; border-right: 2px solid #bbbbbb; width: 250px;">
+        <div id="button-container" style="display: table-cell; padding-right: 10px; border-right: 2px solid #bbbbbb; width: 150px;">
             <div id="testnet-text" style="display: none; font-size: 40px; font-weight: bold; text-align: center; color: #ff0000;"
                 title="The site is in testnet mode. Testnet addresses are used for testing. Testnet coins have no value.">TESTNET</div>
-            <button id="button-page-single-address" style="width: 250px;">Single address</button>
+            <button id="button-page-single-address" style="width: 150px;">Single address</button>
             <br>
-            <button id="button-page-address-details" style="width: 250px;">Address details</button>
+            <button id="button-page-address-details" style="width: 150px;">Address details</button>
             <br>
-            <button id="button-page-bulk-generate" style="width: 250px;">Bulk Generate</button>
+            <button id="button-page-bulk-generate" style="width: 150px;">Bulk Generate</button>
             <br>
-            <button id="button-page-paper-wallet" style="width: 250px;">Paper wallet</button>
+            <button id="button-page-paper-wallet" style="width: 150px;">Paper wallet</button>
             <br>
-            <button id="button-page-mnemonic-seed" style="width: 250px;">Mnemonic Seed</button>
+            <button id="button-page-mnemonic-seed" style="width: 150px;">Mnemonic Seed</button>
             <br>
-            <button id="button-page-information" style="width: 250px; margin-top: 50px;">Information</button>
+            <button id="button-page-information" style="width: 150px; margin-top: 50px;">Information</button>
             <br>
-            <button id="button-page-beginners-guide" style="width: 250px;">Beginner&apos;s guide</button>
+            <button id="button-page-beginners-guide" style="width: 150px;">Beginner&apos;s guide</button>
             <br>
-            <button id="button-page-security-tips" style="width: 250px;">Security tips</button>
+            <button id="button-page-security-tips" style="width: 150px;">Security tips</button>
             <div id="warning-text" style="display: none; font-size: 21px; color: #ff0000; margin-top: 30px;">
                 Warning: it seems you're running this generator from a live website.
                 For valuable wallets, it is highly recommended to run the site from an offline computer.
@@ -583,6 +583,7 @@ li
                 <div style="display: table;">
                     <input id="bulk-count" type="number" value="10" step="1" min="1" max="10000" style="display: inline-block; font-size: 25px; width: 100px; padding: 5px;">
                     <button id="bulk-generate-button" style="display: inline-block; width: 300px; margin-left: 20px;">Generate</button>
+                    <button id="bulk-validate-button" style="display: inline-block; width: 300px; margin-left: 20px;">Validate</button>
                 </div>
             </div>
             <textarea style="display: block; width: 100%; height: 400px; font-family: roboto-mono; font-size: 19px; padding: 8px; margin-top: 15px; border: 2px solid #bbbbbb; resize: none;" id="bulk-addresses" readonly>Press generate to start generating</textarea>
@@ -844,7 +845,36 @@ li
             <img src="data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' height='32' width='32'%3E%3Ccircle cx='16' cy='16' r='16' stroke-width='4' style='fill:black'%3E%3C/circle%3E%3Cpath d='M 12 6 Q 20 16 12 26 Q 24 26 24 16 Q 24 6 12 6' style='stroke-width:0;fill:white;stroke:white;'%3E%3C/path%3E%3C/svg%3E">
         </a>
     </div>
-<script type="text/javascript">
+
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+
+    
+    <script type="text/javascript">
 /*!
  * @overview es6-promise - a tiny implementation of Promises/A+.
  * @copyright Copyright (c) 2014 Yehuda Katz, Tom Dale, Stefan Penner and contributors (Conversion to ES6 API by Jake Archibald)
@@ -867,6 +897,9 @@ function objectOrFunction(x) {
 function isFunction(x) {
   return typeof x === 'function';
 }
+
+
+
 var _isArray = void 0;
 if (Array.isArray) {
   _isArray = Array.isArray;
@@ -1012,7 +1045,9 @@ function then(onFulfillment, onRejection) {
   }
 
   var _state = parent._state;
-if (_state) {
+
+
+  if (_state) {
     var callback = arguments[_state - 1];
     asap(function () {
       return invokeCallback(_state, child, callback, parent._result);
@@ -1200,7 +1235,9 @@ function reject(promise, reason) {
 function subscribe(parent, child, onFulfillment, onRejection) {
   var _subscribers = parent._subscribers;
   var length = _subscribers.length;
-parent._onerror = null;
+
+
+  parent._onerror = null;
 
   _subscribers[length] = child;
   _subscribers[length + FULFILLED] = onFulfillment;
@@ -1338,7 +1375,9 @@ var Enumerator = function () {
   Enumerator.prototype._eachEntry = function _eachEntry(entry, i) {
     var c = this._instanceConstructor;
     var resolve$$1 = c.resolve;
-if (resolve$$1 === resolve$1) {
+
+
+    if (resolve$$1 === resolve$1) {
       var _then = void 0;
       var error = void 0;
       var didError = false;
@@ -1374,7 +1413,9 @@ if (resolve$$1 === resolve$1) {
 
   Enumerator.prototype._settledAt = function _settledAt(state, i, value) {
     var promise = this.promise;
-if (promise._state === PENDING) {
+
+
+    if (promise._state === PENDING) {
       this._remaining--;
 
       if (state === REJECTED) {
@@ -1613,7 +1654,9 @@ function needsNew() {
   settled state.  So a promise that *resolves* a promise that rejects will
   itself reject, and a promise that *resolves* a promise that fulfills will
   itself fulfill.
-Basic Usage:
+
+
+  Basic Usage:
   ------------
 
   ```js
@@ -1884,7 +1927,9 @@ var Promise$2 = function () {
   Useful for tooling.
   @return {Promise}
   */
-Promise.prototype.catch = function _catch(onRejection) {
+
+
+  Promise.prototype.catch = function _catch(onRejection) {
     return this.then(null, onRejection);
   };
 
@@ -1926,7 +1971,9 @@ Promise.prototype.catch = function _catch(onRejection) {
     @param {Function} callback
     @return {Promise}
   */
-Promise.prototype.finally = function _finally(callback) {
+
+
+  Promise.prototype.finally = function _finally(callback) {
     var promise = this;
     var constructor = promise.constructor;
 
@@ -11011,7 +11058,10 @@ function INIT_CryptoJS () {
 
         return CTRGladman;
     }());
-(function () {
+
+
+
+    (function () {
         // Shortcuts
         var C = CryptoJS;
         var C_lib = C.lib;
@@ -13684,7 +13734,7 @@ window.addEventListener("load", function () { return __awaiter(void 0, void 0, v
                                     testRunningDiv_1.style.display = "flex";
                                     testDoneDiv_1.style.display = "none";
                                     return [4 /*yield*/, RunTests_1(function (current, total) {
-                                            testRunningProgress_1.textContent = current + "/" + total;
+                                            testRunningProgress_1.textContent = "".concat(current, "/").concat(total);
                                         })];
                                 case 1:
                                     failedTestMessages = _a.sent();
@@ -13694,7 +13744,7 @@ window.addEventListener("load", function () { return __awaiter(void 0, void 0, v
                                         testResultTextDiv_1.textContent = "All tests OK!";
                                     }
                                     else {
-                                        testResultTextDiv_1.textContent = failedTestMessages.length + " test" + (failedTestMessages.length === 1 ? "" : "s") + " failed! Please report this issue! Check the developer console for details.";
+                                        testResultTextDiv_1.textContent = "".concat(failedTestMessages.length, " test").concat(failedTestMessages.length === 1 ? "" : "s", " failed! Please report this issue! Check the developer console for details.");
                                         failedTestMessages.forEach(console.error);
                                     }
                                     return [2 /*return*/];
@@ -14253,7 +14303,7 @@ var EntropyCanvas = (function () { return Lazy(function () {
                                         randomnessCanvasCTX.beginPath();
                                         randomnessCanvasCTX.arc(x, y, 4, 0, Math.PI * 2);
                                         randomnessCanvasCTX.fill();
-                                        randomnessText.textContent = "Move your mouse around here for randomness\n" + Math.floor(tempEntropy.length / maxRandomnessCount * 100) + "%";
+                                        randomnessText.textContent = "Move your mouse around here for randomness\n".concat(Math.floor(tempEntropy.length / maxRandomnessCount * 100), "%");
                                         tempEntropy.push(event.clientX + event.clientY * document.documentElement.clientWidth);
                                     }
                                 }
@@ -15013,10 +15063,10 @@ var CreateWorkers = function () {
     }
     else {
         var CreateSources = function () {
-            return sources.map(function (source) { return "var " + source.functionName + " = " + source.fn.toString() + ";"; }).join("\n\n") + "\n";
+            return sources.map(function (source) { return "var ".concat(source.functionName, " = ").concat(source.fn.toString(), ";"); }).join("\n\n") + "\n";
         };
         var InitializeSources = function () {
-            return sources.map(function (source) { return "" + ("" + ((source.variableName !== undefined) ? "var " + source.variableName + " = " : "")) + source.functionName + "();"; }).join("\n");
+            return sources.map(function (source) { return "".concat("".concat((source.variableName !== undefined) ? "var ".concat(source.variableName, " = ") : "")).concat(source.functionName, "();"); }).join("\n");
         };
         var WorkerCreatorFunction = function () {
             addEventListener("message", function (message) {
@@ -15029,7 +15079,7 @@ var CreateWorkers = function () {
                 postMessage(result, undefined);
             });
         };
-        var blobContents = ["\n\n// typescript array spread transformation\nvar __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {\n    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {\n        if (ar || !(i in from)) {\n            if (!ar) ar = Array.prototype.slice.call(from, 0, i);\n            ar[i] = from[i];\n        }\n    }\n    return to.concat(ar || Array.prototype.slice.call(from));\n};\n\n" + CreateSources() + "\n\n" + InitializeSources() + "\n\n(\n" + WorkerCreatorFunction.toString() + "\n)();"
+        var blobContents = ["\n\n// typescript array spread transformation\nvar __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {\n    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {\n        if (ar || !(i in from)) {\n            if (!ar) ar = Array.prototype.slice.call(from, 0, i);\n            ar[i] = from[i];\n        }\n    }\n    return to.concat(ar || Array.prototype.slice.call(from));\n};\n\n".concat(CreateSources(), "\n\n").concat(InitializeSources(), "\n\n(\n").concat(WorkerCreatorFunction.toString(), "\n)();")
         ];
         var blob = new Blob(blobContents, { type: "application/javascript" });
         var blobUrl = URL.createObjectURL(blob);
@@ -16283,7 +16333,7 @@ function InitTests() {
             }
             function AssertEqual(actual, expected, errorMessage) {
                 if (actual !== expected) {
-                    failedTestMessages.push("Assertion failed: " + errorMessage + "\nExpected: " + expected + "\nActual: " + actual);
+                    failedTestMessages.push("Assertion failed: ".concat(errorMessage, "\nExpected: ").concat(expected, "\nActual: ").concat(actual));
                 }
             }
             function Assert(actual, errorMessage) {
@@ -16419,7 +16469,7 @@ function InitTests() {
                                                 case 1:
                                                     privateKeyResult = _a.sent();
                                                     if (privateKeyResult.type !== "ok") {
-                                                        Assert(false, "Address generation error for private key: " + testCase.privateKey);
+                                                        Assert(false, "Address generation error for private key: ".concat(testCase.privateKey));
                                                         return [2 /*return*/];
                                                     }
                                                     segwitAddress = privateKeyResult.segwitAddress, bech32Address = privateKeyResult.bech32Address, legacyAddress = privateKeyResult.legacyAddress;
@@ -16530,7 +16580,7 @@ function InitTests() {
                                                         case 1:
                                                             decrypted = _a.sent();
                                                             if (!(decrypted.type === "err")) return [3 /*break*/, 2];
-                                                            Assert(false, "Bip38 decrypt error for private key \"" + privateKey + "\" with password \"" + password + "\"");
+                                                            Assert(false, "Bip38 decrypt error for private key \"".concat(privateKey, "\" with password \"").concat(password, "\""));
                                                             return [3 /*break*/, 4];
                                                         case 2:
                                                             decryptedPrivateKey = decrypted.result;
@@ -16539,7 +16589,7 @@ function InitTests() {
                                                         case 3:
                                                             addressResult = _a.sent();
                                                             if (addressResult.type !== "ok") {
-                                                                Assert(false, "Cannot get addresses from private key: " + decryptedPrivateKey);
+                                                                Assert(false, "Cannot get addresses from private key: ".concat(decryptedPrivateKey));
                                                             }
                                                             else {
                                                                 AssertEqual(addressResult.segwitAddress, testCase.addresses.segwitAddress, "Decrypted segwit address does not match");
@@ -16568,7 +16618,7 @@ function InitTests() {
                                                         case 1:
                                                             encrypted = _a.sent();
                                                             if (encrypted.type === "err") {
-                                                                Assert(false, "Cannot encrypt private key: " + privateKey + " (using password: \"" + password + "\")");
+                                                                Assert(false, "Cannot encrypt private key: ".concat(privateKey, " (using password: \"").concat(password, "\")"));
                                                             }
                                                             else {
                                                                 AssertEqual(encrypted.result, testCase.encryptedPrivateKeyFromPrivateKey, "Encrypted private key does not match");
@@ -16668,7 +16718,7 @@ function InitTests() {
                                                 case 1:
                                                     seedResult = _a.sent();
                                                     if (seedResult.type === "err") {
-                                                        Assert(false, "Cannot get root key from seed: \"" + testCase.seed + "\" (using password: \"" + testCase.password + "\")");
+                                                        Assert(false, "Cannot get root key from seed: \"".concat(testCase.seed, "\" (using password: \"").concat(testCase.password, "\")"));
                                                     }
                                                     else {
                                                         AssertEqual(seedResult.result, testCase.rootKey, "Root key derived from mnemonic seed does not match");
@@ -16793,7 +16843,7 @@ function InitTests() {
                                                 case 1:
                                                     deriveResult = _a.sent();
                                                     if (deriveResult.type === "err") {
-                                                        Assert(false, "Cannot derive extended key from root key: \"" + testCase.rootKey + "\", path: " + testCase.path);
+                                                        Assert(false, "Cannot derive extended key from root key: \"".concat(testCase.rootKey, "\", path: ").concat(testCase.path));
                                                     }
                                                     else {
                                                         Assert(deriveResult.result.privateKey !== null, "Could not derive private key");
@@ -17183,7 +17233,7 @@ function InitAddressDetailsPage() {
                             messageDiv.style.display = "";
                             privateKeyInfoContainer.style.display = "none";
                             privateKeyDetailsTextDiv.style.display = "none";
-                            messageDiv.textContent = "Invalid private key (" + result.message + ")";
+                            messageDiv.textContent = "Invalid private key (".concat(result.message, ")");
                             loading.hide();
                             return [2 /*return*/];
                         }
@@ -17247,7 +17297,7 @@ function InitAddressDetailsPage() {
                         decrypted = _a.sent();
                         if (decrypted.type === "err") {
                             messageDiv.style.display = "";
-                            messageDiv.textContent = "Cannot decrypt address (" + decrypted.error + ")";
+                            messageDiv.textContent = "Cannot decrypt address (".concat(decrypted.error, ")");
                             loading.hide();
                             return [2 /*return*/];
                         }
@@ -17323,18 +17373,19 @@ function InitBulkGeneratePage() {
     bip38Checkbox.addEventListener("change", function () { return bip38PasswordContainer.style.display = bip38Checkbox.checked ? "table" : "none"; });
     // generate related elements
     var bulkGenerateButton = document.getElementById("bulk-generate-button");
+    var bulkValidateButton = document.getElementById("bulk-validate-button");
     var bulkGenerateCountInput = document.getElementById("bulk-count");
     var resultTextArea = document.getElementById("bulk-addresses");
     function BulkGenerate() {
         return __awaiter(this, void 0, void 0, function () {
             function UpdateProgress() {
-                resultTextArea.value = "Generating: " + (generatedCount++) + "/" + count;
+                resultTextArea.value = "Generating: ".concat((generatedCount++), "/").concat(count);
             }
             function SetAndFormatResult(result) {
                 resultTextArea.value = result
                     .map(function (_a, index) {
                     var address = _a.address, privateKey = _a.privateKey;
-                    return (index + 1) + ", \"" + address + "\", \"" + privateKey + "\"";
+                    return "".concat((index + 1), ", \"").concat(address, "\", \"").concat(privateKey, "\"");
                 })
                     .join("\n");
             }
@@ -17404,6 +17455,15 @@ function InitBulkGeneratePage() {
         });
     }
     bulkGenerateButton.addEventListener("click", AsyncNoParallel(BulkGenerate));
+    function BulkValidate() {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                alert('validating - still in progress...');
+                return [2 /*return*/];
+            });
+        });
+    }
+    bulkValidateButton.addEventListener("click", AsyncNoParallel(BulkValidate));
 }
 
 </script>
@@ -17469,7 +17529,7 @@ function InitPaperWalletPage() {
     qrErrorCorrectionLevelMRadioButton.addEventListener("change", function () { return qrErrorCorrectionLevelMRadioButton.checked && SetQRErrorCorrectionLevel("M"); });
     qrErrorCorrectionLevelLRadioButton.addEventListener("change", function () { return qrErrorCorrectionLevelLRadioButton.checked && SetQRErrorCorrectionLevel("L"); });
     // generation type
-    var generationType = 0 /* RandomNew */;
+    var generationType = 0 /* PaperWalletGenerationType.RandomNew */;
     var generationTypeRandomNewRadioButton = document.getElementById("paper-radio-generation-type-random-new");
     var generationTypeUseExistingRadioButton = document.getElementById("paper-radio-generation-type-use-existing");
     var generationTypeFromSeedRadioButton = document.getElementById("paper-radio-generation-type-from-seed");
@@ -17477,12 +17537,12 @@ function InitPaperWalletPage() {
     var generationFromSeedDiv = document.getElementById("paper-div-generate-from-seed");
     function SetGenerationType(type) {
         generationType = type;
-        generationUseExistingDiv.style.display = type === 1 /* UseExisting */ ? "" : "none";
-        generationFromSeedDiv.style.display = type === 2 /* FromSeed */ ? "" : "none";
+        generationUseExistingDiv.style.display = type === 1 /* PaperWalletGenerationType.UseExisting */ ? "" : "none";
+        generationFromSeedDiv.style.display = type === 2 /* PaperWalletGenerationType.FromSeed */ ? "" : "none";
     }
-    generationTypeRandomNewRadioButton.addEventListener("change", function () { return generationTypeRandomNewRadioButton.checked && SetGenerationType(0 /* RandomNew */); });
-    generationTypeUseExistingRadioButton.addEventListener("change", function () { return generationTypeUseExistingRadioButton.checked && SetGenerationType(1 /* UseExisting */); });
-    generationTypeFromSeedRadioButton.addEventListener("change", function () { return generationTypeFromSeedRadioButton.checked && SetGenerationType(2 /* FromSeed */); });
+    generationTypeRandomNewRadioButton.addEventListener("change", function () { return generationTypeRandomNewRadioButton.checked && SetGenerationType(0 /* PaperWalletGenerationType.RandomNew */); });
+    generationTypeUseExistingRadioButton.addEventListener("change", function () { return generationTypeUseExistingRadioButton.checked && SetGenerationType(1 /* PaperWalletGenerationType.UseExisting */); });
+    generationTypeFromSeedRadioButton.addEventListener("change", function () { return generationTypeFromSeedRadioButton.checked && SetGenerationType(2 /* PaperWalletGenerationType.FromSeed */); });
     // bip38
     var bip38Checkbox = document.getElementById("bip38-enabled-paper");
     var bip38PasswordContainer = document.getElementById("bip38-password-box-div-paper");
@@ -17525,13 +17585,13 @@ function InitPaperWalletPage() {
                     return ["left", "top"];
                 }
                 switch (anchor) {
-                    case 0 /* TopLeft */:
+                    case 0 /* PaperWalletElementAnchor.TopLeft */:
                         return ["left", "top"];
-                    case 1 /* TopRight */:
+                    case 1 /* PaperWalletElementAnchor.TopRight */:
                         return ["right", "top"];
-                    case 2 /* BottomLeft */:
+                    case 2 /* PaperWalletElementAnchor.BottomLeft */:
                         return ["left", "bottom"];
-                    case 3 /* BottomRight */:
+                    case 3 /* PaperWalletElementAnchor.BottomRight */:
                         return ["right", "bottom"];
                 }
             }
@@ -17544,10 +17604,10 @@ function InitPaperWalletPage() {
                 img.style[horizontal] = transform.position.x + "px";
                 img.style[vertical] = transform.position.y + "px";
                 if (transform.rotation !== undefined) {
-                    img.style.transform = "rotate(" + transform.rotation + "deg)";
+                    img.style.transform = "rotate(".concat(transform.rotation, "deg)");
                 }
                 if (transform.rotationPivot !== undefined) {
-                    img.style.transformOrigin = transform.rotationPivot.x + "% " + transform.rotationPivot.y + "%";
+                    img.style.transformOrigin = "".concat(transform.rotationPivot.x, "% ").concat(transform.rotationPivot.y, "%");
                 }
                 return img;
             }
@@ -17589,10 +17649,10 @@ function InitPaperWalletPage() {
                 textDiv.style[horizontal] = properties.position.x + "px";
                 textDiv.style[vertical] = properties.position.y + "px";
                 if (properties.rotation !== undefined) {
-                    textDiv.style.transform = "rotate(" + properties.rotation + "deg)";
+                    textDiv.style.transform = "rotate(".concat(properties.rotation, "deg)");
                 }
                 if (properties.rotationPivot !== undefined) {
-                    textDiv.style.transformOrigin = properties.rotationPivot.x + "% " + properties.rotationPivot.y + "%";
+                    textDiv.style.transformOrigin = "".concat(properties.rotationPivot.x, "% ").concat(properties.rotationPivot.y, "%");
                 }
                 return textDiv;
             }
@@ -17666,7 +17726,7 @@ function InitPaperWalletPage() {
     function GeneratePaperWallets() {
         return __awaiter(this, void 0, void 0, function () {
             function UpdateProgress() {
-                progressTextDiv.textContent = "Generating: " + currentCount++ + "/" + count;
+                progressTextDiv.textContent = "Generating: ".concat(currentCount++, "/").concat(count);
             }
             function CreateDivFromAddressAndPrivateKey(address, privateKey) {
                 return __awaiter(this, void 0, void 0, function () {
@@ -17711,9 +17771,9 @@ function InitPaperWalletPage() {
                         results = [];
                         _a = generationType;
                         switch (_a) {
-                            case 0 /* RandomNew */: return [3 /*break*/, 1];
-                            case 1 /* UseExisting */: return [3 /*break*/, 5];
-                            case 2 /* FromSeed */: return [3 /*break*/, 6];
+                            case 0 /* PaperWalletGenerationType.RandomNew */: return [3 /*break*/, 1];
+                            case 1 /* PaperWalletGenerationType.UseExisting */: return [3 /*break*/, 5];
+                            case 2 /* PaperWalletGenerationType.FromSeed */: return [3 /*break*/, 6];
                         }
                         return [3 /*break*/, 9];
                     case 1:
@@ -17888,7 +17948,7 @@ function InitPaperWalletPage() {
                         }
                         rootKey = rootKeyResult.result;
                         purpose_1 = currentAddressType === "legacy" ? "44" : currentAddressType === "segwit" ? "49" : "84";
-                        basePath = "m/" + purpose_1 + "'/0'/0'";
+                        basePath = "m/".concat(purpose_1, "'/0'/0'");
                         return [4 /*yield*/, WorkerInterface.DeriveBIP32ExtendedKey(rootKey, basePath + (changeAddresses ? "/1" : "/0"), purpose_1, hardened_1)];
                     case 8:
                         derivedResult_1 = _c.sent();
@@ -17963,7 +18023,7 @@ function InitPaperWalletPage() {
                                 errorMessages.map(function (err) {
                                     var errorMessage = err[0];
                                     var privateKey = err[1];
-                                    return errorMessage + " (processing private key \"" + privateKey + "\")";
+                                    return "".concat(errorMessage, " (processing private key \"").concat(privateKey, "\")");
                                 }).join("\n"));
                         }
                         else {
@@ -18126,7 +18186,7 @@ function InitMnemonicSeedPage() {
                                         case 1:
                                             decodedKeyResult = _a.sent();
                                             if (decodedKeyResult.type === "err") {
-                                                ShowError("Invalid BIP32 key: " + decodedKeyResult.error);
+                                                ShowError("Invalid BIP32 key: ".concat(decodedKeyResult.error));
                                                 return [2 /*return*/, null];
                                             }
                                             SetPresetsForExtendedKey();
@@ -18153,7 +18213,7 @@ function InitMnemonicSeedPage() {
                                         case 3:
                                             result = _a.sent();
                                             if (result.type === "err") {
-                                                ShowError("Invalid mnemonic seed: " + result.error);
+                                                ShowError("Invalid mnemonic seed: ".concat(result.error));
                                                 return [2 /*return*/, null];
                                             }
                                             SetPresetsForMnemonicSeed();
@@ -18253,7 +18313,7 @@ function InitMnemonicSeedPage() {
                 seedResultsAddressesContainerDiv.style.display = "none";
             }
             function UpdateProgress() {
-                calculateProgressDiv.textContent = "Calculating: " + currentProgress++ + "/" + count;
+                calculateProgressDiv.textContent = "Calculating: ".concat(currentProgress++, "/").concat(count);
             }
             function CreateRow(path, address, privateKey) {
                 var row = document.createElement("div");
@@ -18434,7 +18494,7 @@ function GetPaperWalletDesign(designName, isBIP38) {
                         size: 100
                     }],
                 privateKeyQRCodes: [{
-                        anchor: 3 /* BottomRight */,
+                        anchor: 3 /* PaperWalletElementAnchor.BottomRight */,
                         position: { x: 10, y: 10 },
                         size: 100
                     }],
@@ -18443,7 +18503,7 @@ function GetPaperWalletDesign(designName, isBIP38) {
                         size: 18
                     }],
                 privateKeyTexts: [{
-                        anchor: 3 /* BottomRight */,
+                        anchor: 3 /* PaperWalletElementAnchor.BottomRight */,
                         position: { x: 120, y: 10 },
                         size: 18
                     }],
@@ -18458,7 +18518,7 @@ function GetPaperWalletDesign(designName, isBIP38) {
                         text: isBIP38 ? "Encrypted private key:" : "Private key:",
                         fontFamily: "Verdana",
                         bold: true,
-                        anchor: 3 /* BottomRight */,
+                        anchor: 3 /* PaperWalletElementAnchor.BottomRight */,
                         position: { x: isBIP38 ? 431 : 514, y: 40 },
                         size: 25
                     }
@@ -18836,26 +18896,26 @@ function InitCustomPaperWalletDesign() {
     }
     function UpdatePreview() {
         var backgroundImageScale = parameters["backgroundImageScale"];
-        previewContainer.style.width = backgroundImageSize.x * backgroundImageScale / 100 + "px";
-        previewContainer.style.height = backgroundImageSize.y * backgroundImageScale / 100 + "px";
+        previewContainer.style.width = "".concat(backgroundImageSize.x * backgroundImageScale / 100, "px");
+        previewContainer.style.height = "".concat(backgroundImageSize.y * backgroundImageScale / 100, "px");
         previewAddress.style.left = parameters["addressPositionX"] + "px";
         previewAddress.style.top = parameters["addressPositionY"] + "px";
         previewAddress.style.fontSize = parameters["addressFontSize"] + "px";
         previewAddress.textContent = SplitTextIntoLines(dummyAddress, parameters["addressLettersPerLine"]).join("\n");
-        previewAddress.style.transform = "rotate(" + parameters["addressRotation"] + "deg)";
+        previewAddress.style.transform = "rotate(".concat(parameters["addressRotation"], "deg)");
         previewPrivateKey.style.left = parameters["privateKeyPositionX"] + "px";
         previewPrivateKey.style.top = parameters["privateKeyPositionY"] + "px";
         previewPrivateKey.style.fontSize = parameters["privateKeyFontSize"] + "px";
         previewPrivateKey.textContent = SplitTextIntoLines(dummyPrivateKey, parameters["privateKeyLettersPerLine"]).join("\n");
-        previewPrivateKey.style.transform = "rotate(" + parameters["privateKeyRotation"] + "deg)";
+        previewPrivateKey.style.transform = "rotate(".concat(parameters["privateKeyRotation"], "deg)");
         previewAddressQR.style.left = parameters["addressQRPositionX"] + "px";
         previewAddressQR.style.top = parameters["addressQRPositionY"] + "px";
         previewAddressQR.style.width = previewAddress.style.height = parameters["addressQRSize"] + "px";
-        previewAddressQR.style.transform = "rotate(" + parameters["addressQRRotation"] + "deg)";
+        previewAddressQR.style.transform = "rotate(".concat(parameters["addressQRRotation"], "deg)");
         previewPrivateKeyQR.style.left = parameters["privateKeyQRPositionX"] + "px";
         previewPrivateKeyQR.style.top = parameters["privateKeyQRPositionY"] + "px";
         previewPrivateKeyQR.style.width = previewAddress.style.height = parameters["privateKeyQRSize"] + "px";
-        previewPrivateKeyQR.style.transform = "rotate(" + parameters["privateKeyQRRotation"] + "deg)";
+        previewPrivateKeyQR.style.transform = "rotate(".concat(parameters["privateKeyQRRotation"], "deg)");
     }
     function CreateLabelForInput(text, input) {
         var label = document.createElement("label");

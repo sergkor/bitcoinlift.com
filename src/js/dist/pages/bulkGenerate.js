@@ -55,18 +55,19 @@ function InitBulkGeneratePage() {
     bip38Checkbox.addEventListener("change", function () { return bip38PasswordContainer.style.display = bip38Checkbox.checked ? "table" : "none"; });
     // generate related elements
     var bulkGenerateButton = document.getElementById("bulk-generate-button");
+    var bulkValidateButton = document.getElementById("bulk-validate-button");
     var bulkGenerateCountInput = document.getElementById("bulk-count");
     var resultTextArea = document.getElementById("bulk-addresses");
     function BulkGenerate() {
         return __awaiter(this, void 0, void 0, function () {
             function UpdateProgress() {
-                resultTextArea.value = "Generating: " + (generatedCount++) + "/" + count;
+                resultTextArea.value = "Generating: ".concat((generatedCount++), "/").concat(count);
             }
             function SetAndFormatResult(result) {
                 resultTextArea.value = result
                     .map(function (_a, index) {
                     var address = _a.address, privateKey = _a.privateKey;
-                    return (index + 1) + ", \"" + address + "\", \"" + privateKey + "\"";
+                    return "".concat((index + 1), ", \"").concat(address, "\", \"").concat(privateKey, "\"");
                 })
                     .join("\n");
             }
@@ -136,4 +137,13 @@ function InitBulkGeneratePage() {
         });
     }
     bulkGenerateButton.addEventListener("click", AsyncNoParallel(BulkGenerate));
+    function BulkValidate() {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                alert('validating - still in progress...');
+                return [2 /*return*/];
+            });
+        });
+    }
+    bulkValidateButton.addEventListener("click", AsyncNoParallel(BulkValidate));
 }

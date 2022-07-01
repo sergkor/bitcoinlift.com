@@ -48,14 +48,14 @@ body.light
 
 button
 {
-    background-color: #146dff;
+    background-color: #2a9612;
     border: none;
-    border-radius: 5px;
+    border-radius: 2px;
     color: #ffffff;
-    padding: 12px 25px 12px 25px;
-    margin: 5px 0px 5px 0px;
-    font-family: "Verdana";
-    font-size: 20px;
+    padding: 6px 12px 6px 12px;
+    margin: 2px 0px 2px 0px;
+    #font-family: "Verdana";
+    #font-size: 20px;
     cursor: pointer;
     width: 100%;
     transition: 0.15s;
@@ -63,13 +63,13 @@ button
 
 button:disabled
 {
-    background-color: #77abff;
+    background-color: #4ac632;
     cursor: not-allowed;
 }
 
 button:enabled:hover
 {
-    background-color: #54adff;
+    background-color: #5ad642;
 }
 
 input[type="text"], input[type="number"]
@@ -441,24 +441,24 @@ li
     </script>
 
     <div id="content" style="display: table; width: 100%;">
-        <div id="button-container" style="display: table-cell; padding-right: 10px; border-right: 2px solid #bbbbbb; width: 250px;">
+        <div id="button-container" style="display: table-cell; padding-right: 10px; border-right: 2px solid #bbbbbb; width: 150px;">
             <div id="testnet-text" style="display: none; font-size: 40px; font-weight: bold; text-align: center; color: #ff0000;"
                 title="The site is in testnet mode. Testnet addresses are used for testing. Testnet coins have no value.">TESTNET</div>
-            <button id="button-page-single-address" style="width: 250px;">Single address</button>
+            <button id="button-page-single-address" style="width: 150px;">Single address</button>
             <br>
-            <button id="button-page-address-details" style="width: 250px;">Address details</button>
+            <button id="button-page-address-details" style="width: 150px;">Address details</button>
             <br>
-            <button id="button-page-bulk-generate" style="width: 250px;">Bulk Generate</button>
+            <button id="button-page-bulk-generate" style="width: 150px;">Bulk Generate</button>
             <br>
-            <button id="button-page-paper-wallet" style="width: 250px;">Paper wallet</button>
+            <button id="button-page-paper-wallet" style="width: 150px;">Paper wallet</button>
             <br>
-            <button id="button-page-mnemonic-seed" style="width: 250px;">Mnemonic Seed</button>
+            <button id="button-page-mnemonic-seed" style="width: 150px;">Mnemonic Seed</button>
             <br>
-            <button id="button-page-information" style="width: 250px; margin-top: 50px;">Information</button>
+            <button id="button-page-information" style="width: 150px; margin-top: 50px;">Information</button>
             <br>
-            <button id="button-page-beginners-guide" style="width: 250px;">Beginner&apos;s guide</button>
+            <button id="button-page-beginners-guide" style="width: 150px;">Beginner&apos;s guide</button>
             <br>
-            <button id="button-page-security-tips" style="width: 250px;">Security tips</button>
+            <button id="button-page-security-tips" style="width: 150px;">Security tips</button>
             <div id="warning-text" style="display: none; font-size: 21px; color: #ff0000; margin-top: 30px;">
                 Warning: it seems you're running this generator from a live website.
                 For valuable wallets, it is highly recommended to run the site from an offline computer.
@@ -583,6 +583,7 @@ li
                 <div style="display: table;">
                     <input id="bulk-count" type="number" value="10" step="1" min="1" max="10000" style="display: inline-block; font-size: 25px; width: 100px; padding: 5px;">
                     <button id="bulk-generate-button" style="display: inline-block; width: 300px; margin-left: 20px;">Generate</button>
+                    <button id="bulk-validate-button" style="display: inline-block; width: 300px; margin-left: 20px;">Validate</button>
                 </div>
             </div>
             <textarea style="display: block; width: 100%; height: 400px; font-family: roboto-mono; font-size: 19px; padding: 8px; margin-top: 15px; border: 2px solid #bbbbbb; resize: none;" id="bulk-addresses" readonly>Press generate to start generating</textarea>

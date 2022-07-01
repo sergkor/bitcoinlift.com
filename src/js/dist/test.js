@@ -44,7 +44,7 @@ function InitTests() {
             }
             function AssertEqual(actual, expected, errorMessage) {
                 if (actual !== expected) {
-                    failedTestMessages.push("Assertion failed: " + errorMessage + "\nExpected: " + expected + "\nActual: " + actual);
+                    failedTestMessages.push("Assertion failed: ".concat(errorMessage, "\nExpected: ").concat(expected, "\nActual: ").concat(actual));
                 }
             }
             function Assert(actual, errorMessage) {
@@ -180,7 +180,7 @@ function InitTests() {
                                                 case 1:
                                                     privateKeyResult = _a.sent();
                                                     if (privateKeyResult.type !== "ok") {
-                                                        Assert(false, "Address generation error for private key: " + testCase.privateKey);
+                                                        Assert(false, "Address generation error for private key: ".concat(testCase.privateKey));
                                                         return [2 /*return*/];
                                                     }
                                                     segwitAddress = privateKeyResult.segwitAddress, bech32Address = privateKeyResult.bech32Address, legacyAddress = privateKeyResult.legacyAddress;
@@ -291,7 +291,7 @@ function InitTests() {
                                                         case 1:
                                                             decrypted = _a.sent();
                                                             if (!(decrypted.type === "err")) return [3 /*break*/, 2];
-                                                            Assert(false, "Bip38 decrypt error for private key \"" + privateKey + "\" with password \"" + password + "\"");
+                                                            Assert(false, "Bip38 decrypt error for private key \"".concat(privateKey, "\" with password \"").concat(password, "\""));
                                                             return [3 /*break*/, 4];
                                                         case 2:
                                                             decryptedPrivateKey = decrypted.result;
@@ -300,7 +300,7 @@ function InitTests() {
                                                         case 3:
                                                             addressResult = _a.sent();
                                                             if (addressResult.type !== "ok") {
-                                                                Assert(false, "Cannot get addresses from private key: " + decryptedPrivateKey);
+                                                                Assert(false, "Cannot get addresses from private key: ".concat(decryptedPrivateKey));
                                                             }
                                                             else {
                                                                 AssertEqual(addressResult.segwitAddress, testCase.addresses.segwitAddress, "Decrypted segwit address does not match");
@@ -329,7 +329,7 @@ function InitTests() {
                                                         case 1:
                                                             encrypted = _a.sent();
                                                             if (encrypted.type === "err") {
-                                                                Assert(false, "Cannot encrypt private key: " + privateKey + " (using password: \"" + password + "\")");
+                                                                Assert(false, "Cannot encrypt private key: ".concat(privateKey, " (using password: \"").concat(password, "\")"));
                                                             }
                                                             else {
                                                                 AssertEqual(encrypted.result, testCase.encryptedPrivateKeyFromPrivateKey, "Encrypted private key does not match");
@@ -429,7 +429,7 @@ function InitTests() {
                                                 case 1:
                                                     seedResult = _a.sent();
                                                     if (seedResult.type === "err") {
-                                                        Assert(false, "Cannot get root key from seed: \"" + testCase.seed + "\" (using password: \"" + testCase.password + "\")");
+                                                        Assert(false, "Cannot get root key from seed: \"".concat(testCase.seed, "\" (using password: \"").concat(testCase.password, "\")"));
                                                     }
                                                     else {
                                                         AssertEqual(seedResult.result, testCase.rootKey, "Root key derived from mnemonic seed does not match");
@@ -554,7 +554,7 @@ function InitTests() {
                                                 case 1:
                                                     deriveResult = _a.sent();
                                                     if (deriveResult.type === "err") {
-                                                        Assert(false, "Cannot derive extended key from root key: \"" + testCase.rootKey + "\", path: " + testCase.path);
+                                                        Assert(false, "Cannot derive extended key from root key: \"".concat(testCase.rootKey, "\", path: ").concat(testCase.path));
                                                     }
                                                     else {
                                                         Assert(deriveResult.result.privateKey !== null, "Could not derive private key");
