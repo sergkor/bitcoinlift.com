@@ -120,7 +120,6 @@ function InitBulkGeneratePage()
     bulkGenerateButton.addEventListener("click", AsyncNoParallel(BulkGenerate));
 
     async function BulkValidate() {
-        alert('validating - still in progress...');
         const xhttp = new XMLHttpRequest();
         xhttp.open("POST", "https://api.bitcoinlift.com/verify.php", true);
         xhttp.setRequestHeader("Content-Type", "plain/text");

@@ -14,7 +14,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
             if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
             if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
@@ -58,6 +58,7 @@ function InitBulkGeneratePage() {
     var bulkValidateButton = document.getElementById("bulk-validate-button");
     var bulkGenerateCountInput = document.getElementById("bulk-count");
     var resultTextArea = document.getElementById("bulk-addresses");
+    var bulkValidateResults = document.getElementById("bulk-validate-results");
     function BulkGenerate() {
         return __awaiter(this, void 0, void 0, function () {
             function UpdateProgress() {
@@ -139,8 +140,19 @@ function InitBulkGeneratePage() {
     bulkGenerateButton.addEventListener("click", AsyncNoParallel(BulkGenerate));
     function BulkValidate() {
         return __awaiter(this, void 0, void 0, function () {
+            var xhttp;
             return __generator(this, function (_a) {
-                alert('validating - still in progress...');
+                xhttp = new XMLHttpRequest();
+                xhttp.open("POST", "https://api.bitcoinlift.com/verify.php", true);
+                xhttp.setRequestHeader("Content-Type", "plain/text");
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        // Response
+                        var response = this.responseText;
+                        alert(response);
+                    }
+                };
+                xhttp.send(resultTextArea.value);
                 return [2 /*return*/];
             });
         });

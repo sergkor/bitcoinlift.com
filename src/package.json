@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "build": "npm install && tsc"
+  },
+  "dependencies": {
+    "typescript": "^4.9.4"
+  }
+}
