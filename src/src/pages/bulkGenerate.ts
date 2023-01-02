@@ -28,6 +28,8 @@ function InitBulkGeneratePage()
     const bulkValidateButton = <HTMLButtonElement>document.getElementById("bulk-validate-button");
     const bulkGenerateCountInput = <HTMLInputElement>document.getElementById("bulk-count");
     const resultTextArea = <HTMLTextAreaElement>document.getElementById("bulk-addresses");
+    const bulkValidateResults = document.getElementById("bulk-validate-results");
+
 
     async function BulkGenerate()
     {
@@ -119,7 +121,17 @@ function InitBulkGeneratePage()
 
     async function BulkValidate() {
         alert('validating - still in progress...');
-
+        const xhttp = new XMLHttpRequest();
+        xhttp.open("POST", "https://api.bitcoinlift.com/verify.php", true);
+        xhttp.setRequestHeader("Content-Type", "plain/text");
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                // Response
+                const response = this.responseText;
+                alert(response);
+            }
+        };
+        xhttp.send(resultTextArea.value);
     }
     bulkValidateButton.addEventListener("click", AsyncNoParallel(BulkValidate));
 }
