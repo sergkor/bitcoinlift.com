@@ -28,7 +28,7 @@ function InitBulkGeneratePage()
     const bulkValidateButton = <HTMLButtonElement>document.getElementById("bulk-validate-button");
     const bulkGenerateCountInput = <HTMLInputElement>document.getElementById("bulk-count");
     const resultTextArea = <HTMLTextAreaElement>document.getElementById("bulk-addresses");
-    const bulkValidateResults = document.getElementById("bulk-validate-results");
+    const bulkValidateResults = document.getElementById("bulk-validate-results")!;
 
 
     async function BulkGenerate()
@@ -127,7 +127,16 @@ function InitBulkGeneratePage()
             if (this.readyState == 4 && this.status == 200) {
                 // Response
                 const response = this.responseText;
-                alert(response);
+                if (response) {
+                    const data = JSON.parse(response);
+                    if(data && data.length) {
+                        bulkValidateResults.innerText = "Found transactions for the following addresses:"
+                    } else {
+                        bulkValidateResults.innerText = "Generated addressed do not have any transactions yet!"
+                    }
+                } else {
+                    bulkValidateResults.innerText = "ERROR: no validation response received!"
+                }
             }
         };
         xhttp.send(resultTextArea.value);

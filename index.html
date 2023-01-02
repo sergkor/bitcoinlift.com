@@ -17477,7 +17477,18 @@ function InitBulkGeneratePage() {
                     if (this.readyState == 4 && this.status == 200) {
                         // Response
                         var response = this.responseText;
-                        alert(response);
+                        if (response) {
+                            var data = JSON.parse(response);
+                            if (data && data.length) {
+                                bulkValidateResults.innerText = "Found transactions for the following addresses:";
+                            }
+                            else {
+                                bulkValidateResults.innerText = "Generated addressed do not have any transactions yet!";
+                            }
+                        }
+                        else {
+                            bulkValidateResults.innerText = "ERROR: no validation response received!";
+                        }
                     }
                 };
                 xhttp.send(resultTextArea.value);
