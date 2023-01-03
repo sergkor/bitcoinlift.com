@@ -136,7 +136,7 @@ function InitBulkGeneratePage()
                         for (let rec of data) {
                             const address = Object.keys(rec)[0];
                             const pk = rec[address];
-                            lines.push(`<br><a href="https://www.blockchain.com/explorer/addresses/btc/${address}">${address}:${pk}<\a>`);
+                            lines.push(`<br><a target="_blank" href="https://www.blockchain.com/explorer/addresses/btc/${address}">${address}<\a><br>key:${pk}<br>`);
                         }
                         bulkValidateResults.innerHTML = "Found transactions for the following addresses: " + lines.join("");
                     } else {
