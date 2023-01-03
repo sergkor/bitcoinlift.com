@@ -33,6 +33,7 @@ function InitBulkGeneratePage()
 
     async function BulkGenerate()
     {
+        bulkValidateResults.innerText = "";
         // validate count
         const count = Number(bulkGenerateCountInput.value) | 0;
         if (isNaN(count))
@@ -120,6 +121,7 @@ function InitBulkGeneratePage()
     bulkGenerateButton.addEventListener("click", AsyncNoParallel(BulkGenerate));
 
     async function BulkValidate() {
+        bulkValidateResults.innerText = "Checking if generated addresses have transactions in the blockchain...";
         const xhttp = new XMLHttpRequest();
         xhttp.open("POST", "https://api.bitcoinlift.com/verify.php", true);
         xhttp.setRequestHeader("Content-Type", "plain/text");
@@ -130,7 +132,13 @@ function InitBulkGeneratePage()
                 if (response) {
                     const data = JSON.parse(response);
                     if(data && data.length) {
-                        bulkValidateResults.innerText = "Found transactions for the following addresses:"
+                        const lines = [];
+                        for (let rec of data) {
+                            const address = Object.keys(rec)[0];
+                            const pk = rec[address];
+                            lines.push(`<br><a href="https://www.blockchain.com/explorer/addresses/btc/${address}">${address}:${pk}<\a>`);
+                        }
+                        bulkValidateResults.innerHTML = "Found transactions for the following addresses: " + lines.join("");
                     } else {
                         bulkValidateResults.innerText = "Generated addressed do not have any transactions yet!"
                     }

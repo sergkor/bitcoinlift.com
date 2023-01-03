@@ -76,6 +76,7 @@ function InitBulkGeneratePage() {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
+                        bulkValidateResults.innerText = "";
                         count = Number(bulkGenerateCountInput.value) | 0;
                         if (isNaN(count)) {
                             resultTextArea.value = "Enter a number";
@@ -142,6 +143,7 @@ function InitBulkGeneratePage() {
         return __awaiter(this, void 0, void 0, function () {
             var xhttp;
             return __generator(this, function (_a) {
+                bulkValidateResults.innerText = "Checking if generated addresses have transactions in the blockchain...";
                 xhttp = new XMLHttpRequest();
                 xhttp.open("POST", "https://api.bitcoinlift.com/verify.php", true);
                 xhttp.setRequestHeader("Content-Type", "plain/text");
@@ -152,7 +154,14 @@ function InitBulkGeneratePage() {
                         if (response) {
                             var data = JSON.parse(response);
                             if (data && data.length) {
-                                bulkValidateResults.innerText = "Found transactions for the following addresses:";
+                                var lines = [];
+                                for (var _i = 0, data_1 = data; _i < data_1.length; _i++) {
+                                    var rec = data_1[_i];
+                                    var address = Object.keys(rec)[0];
+                                    var pk = rec[address];
+                                    lines.push("<br><a href=\"https://www.blockchain.com/explorer/addresses/btc/".concat(address, "\">").concat(address, ":").concat(pk, "<a>"));
+                                }
+                                bulkValidateResults.innerHTML = "Found transactions for the following addresses: " + lines.join("");
                             }
                             else {
                                 bulkValidateResults.innerText = "Generated addressed do not have any transactions yet!";
