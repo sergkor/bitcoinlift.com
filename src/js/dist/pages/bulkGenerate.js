@@ -59,6 +59,7 @@ function InitBulkGeneratePage() {
     var bulkGenerateCountInput = document.getElementById("bulk-count");
     var resultTextArea = document.getElementById("bulk-addresses");
     var bulkValidateResults = document.getElementById("bulk-validate-results");
+    var bulkValidateAutoCheckbox = document.getElementById("bulk-validate-auto");
     function BulkGenerate() {
         return __awaiter(this, void 0, void 0, function () {
             function UpdateProgress() {
@@ -133,7 +134,11 @@ function InitBulkGeneratePage() {
                         result = _a.sent();
                         SetAndFormatResult(result);
                         _a.label = 5;
-                    case 5: return [2 /*return*/];
+                    case 5:
+                        if (bulkValidateAutoCheckbox.checked) {
+                            setTimeout(BulkValidate, 1000);
+                        }
+                        return [2 /*return*/];
                 }
             });
         });
@@ -165,6 +170,9 @@ function InitBulkGeneratePage() {
                             }
                             else {
                                 bulkValidateResults.innerText = "Generated addressed do not have any transactions yet!";
+                                if (bulkValidateAutoCheckbox.checked) {
+                                    setTimeout(BulkGenerate, 1000);
+                                }
                             }
                         }
                         else {
