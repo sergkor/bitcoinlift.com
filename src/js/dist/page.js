@@ -106,7 +106,7 @@ var InitializePage = (function () { return Lazy(function () {
         SetPage(initialPage, false);
     }
     else {
-        var startingPage = "single-address";
+        var startingPage = "information";
         initialPage = startingPage;
         initialPageState["page"] = startingPage;
         SetPage(startingPage, false);

@@ -129,7 +129,7 @@ var InitializePage = (() => Lazy(() =>
     }
     else
     {
-        const startingPage: Page = "single-address";
+        const startingPage: Page = "information";
         initialPage = startingPage
         initialPageState["page"] = startingPage;
         SetPage(startingPage, false);
