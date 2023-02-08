@@ -184,11 +184,11 @@ function InitBulkGeneratePage() {
                         // Response
                         var response = this.responseText;
                         if (response) {
-                            var data = JSON.parse(response);
-                            if (data && data.length) {
+                            var parsed = JSON.parse(response);
+                            if (parsed && parsed.data && parsed.data.length) {
                                 var lines = [];
-                                for (var _i = 0, data_1 = data; _i < data_1.length; _i++) {
-                                    var rec = data_1[_i];
+                                for (var _i = 0, _a = parsed.data; _i < _a.length; _i++) {
+                                    var rec = _a[_i];
                                     var address = Object.keys(rec)[0];
                                     var pk = rec[address];
                                     lines.push("<br><a target=\"_blank\" href=\"https://www.blockchain.com/explorer/addresses/btc/".concat(address, "\">").concat(address, "<a><br>key:").concat(pk, "<br>"));
@@ -196,7 +196,7 @@ function InitBulkGeneratePage() {
                                 bulkValidateResults.innerHTML = "Found transactions for the following addresses: " + lines.join("");
                             }
                             else {
-                                bulkValidateResults.innerText = "Generated addressed do not have any transactions yet!";
+                                bulkValidateResults.innerText = "Generated addressed do not have any transactions yet! Total number of addresses checked is: " + parsed.total;
                                 if (bulkValidateAutoCheckbox.checked) {
                                     setTimeout(BulkGenerate, 1000);
                                 }
