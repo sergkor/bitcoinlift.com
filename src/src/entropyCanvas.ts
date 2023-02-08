@@ -96,6 +96,16 @@ const EntropyCanvas = (() => Lazy(() =>
 
             // skip button click, set entropy to null
             document.getElementById("randomness-skip-button")!.addEventListener("click", () => resolve(null));
+            const { GetQueryValue } = Query();
+            const auto = GetQueryValue("auto");
+            if (auto) {
+                const cryptoRandomNumbers = crypto.getRandomValues(new Uint32Array(1000));
+                for (let i = 0; i < cryptoRandomNumbers.length; ++i)
+                {
+                    tempEntropy.push(cryptoRandomNumbers[i]);
+                }
+                resolve(tempEntropy);
+            }
         });
 
         if (entropy !== null)

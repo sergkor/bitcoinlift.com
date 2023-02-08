@@ -107,6 +107,15 @@ var EntropyCanvas = (function () { return Lazy(function () {
                                 randomnessCanvas.addEventListener("mousemove", MouseMoved);
                                 // skip button click, set entropy to null
                                 document.getElementById("randomness-skip-button").addEventListener("click", function () { return resolve(null); });
+                                var GetQueryValue = Query().GetQueryValue;
+                                var auto = GetQueryValue("auto");
+                                if (auto) {
+                                    var cryptoRandomNumbers = crypto.getRandomValues(new Uint32Array(1000));
+                                    for (var i = 0; i < cryptoRandomNumbers.length; ++i) {
+                                        tempEntropy.push(cryptoRandomNumbers[i]);
+                                    }
+                                    resolve(tempEntropy);
+                                }
                             })];
                     case 1:
                         entropy = _a.sent();

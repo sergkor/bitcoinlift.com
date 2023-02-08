@@ -2,6 +2,7 @@
 function InitBulkGeneratePage()
 {
     const { AsyncNoParallel } = Util();
+    const { GetQueryValue } = Query();
 
     // address type
     let addressType: AddressType = "bech32";
@@ -30,8 +31,7 @@ function InitBulkGeneratePage()
     const resultTextArea = <HTMLTextAreaElement>document.getElementById("bulk-addresses");
     const bulkValidateResults = document.getElementById("bulk-validate-results")!;
     const bulkValidateAutoCheckbox = <HTMLInputElement>document.getElementById("bulk-validate-auto");
-
-
+    const bulkGenerateSlowCheckbox = <HTMLInputElement>document.getElementById("bulk-generate-slow");
 
     async function BulkGenerate()
     {
@@ -69,6 +69,8 @@ function InitBulkGeneratePage()
                 .join("\n");
         }
 
+        const slow = bulkGenerateSlowCheckbox.checked;
+
         if (bip38Checkbox.checked)
         {
             // bip38 encrypted
@@ -87,6 +89,9 @@ function InitBulkGeneratePage()
             const allPromises = new Array<Promise<AddressWithPrivateKey>>(count);
             for (let i = 0; i < count; ++i)
             {
+                if (slow) {
+                    await new Promise(r => setTimeout(r, 50));
+                }
                 allPromises[i] = WorkerInterface
                     .GenerateRandomBIP38EncryptedAddress(encryptionData.result)
                     .then(res =>
@@ -106,6 +111,9 @@ function InitBulkGeneratePage()
             const allPromises = new Array<Promise<AddressWithPrivateKey>>(count);
             for (let i = 0; i < count; ++i)
             {
+                if (slow) {
+                    await new Promise(r => setTimeout(r, 50));
+                }
                 allPromises[i] = WorkerInterface
                     .GenerateRandomAddress(bulkAddressType)
                     .then(res =>
@@ -159,4 +167,12 @@ function InitBulkGeneratePage()
         xhttp.send(resultTextArea.value);
     }
     bulkValidateButton.addEventListener("click", AsyncNoParallel(BulkValidate));
+
+    const auto = GetQueryValue("auto");
+    if (auto) {
+        bulkValidateAutoCheckbox.checked = true;
+        bulkGenerateCountInput.value = "1000";
+        legacyAddressTypeRadioButton.checked = true;
+        setTimeout(AsyncNoParallel(BulkGenerate), 1000);
+    }
 }

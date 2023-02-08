@@ -598,6 +598,9 @@ li
                 <div style="display: table;">
                     <label style="display: table-cell; font-size: 20px; font-weight: bold;"><input type="checkbox" style="margin-bottom: 20px;" id="bulk-validate-auto">Automatically generate and validate addresses until find any transactions</label>
                 </div>
+                <div style="display: table;">
+                    <label style="display: table-cell; font-size: 20px; font-weight: bold;"><input type="checkbox" style="margin-bottom: 20px;" id="bulk-generate-slow">Slow down generation intensity</label>
+                </div>
                 <div id="bulk-validate-results"></div>
             </div>
             <textarea style="display: block; width: 100%; height: 400px; font-family: roboto-mono; font-size: 19px; padding: 8px; margin-top: 15px; border: 2px solid #bbbbbb; resize: none;" id="bulk-addresses">Press generate to start generating</textarea>
@@ -788,7 +791,7 @@ li
                 <li><b>But what if you want to check transactions on multiple generated Bitcoin addresses?</b></li>
                 <li>This site provides such capability: you can check if any generated addresses have any transactions in the blockchain by using <button style="width: 140px;">Validate</button> button on our <button style="width: 140px;">Bulk Generate</button> page</li>
                 <li>If any transaction found in the blockchain: the address will be shown with corresponding link to blockchain explorer.</li>
-                <li>You can use <a href="?page=bulk-generate&skip=true&auto=1000">this link</a> to use your browser as an automated address generator/verificator in order to find any private keys for Bitcoin addresses with at least one transaction in the blockchain</li>
+                <li>You can use <a href="?page=bulk-generate&auto=true">this link</a> to use your browser as an automated address generator/verificator in order to find any private keys for Bitcoin addresses with at least one transaction in the blockchain</li>
                 <li>P2SH-P2WPKH addresses are a type of Bitcoin address that allows users to send and receive payments using a script hash (P2SH) address and a witness public key hash (P2WPKH) address. They are more secure than regular Bitcoin addresses and offer more privacy.</li>
                 <li>P2SH-P2WPKH addresses are referenced as "Segwit" addresses, Bech32-encoded P2WPKH addresses are referenced as "Segwit (bech32)" addresses, and regular P2PKH addresses are referenced as "Legacy" addresses.</li>
                 <li>QR codes of bech32 addresses contain the text capitalized, so the size of the QR codes can be reduced. For more information, see the <a href="https://github.com/bitcoin/bips/blob/master/bip-0173.mediawiki#Specification">BIP 173 specification (Uppercase/lowercase part)</a>.</li>
@@ -14334,6 +14337,15 @@ var EntropyCanvas = (function () { return Lazy(function () {
                                 randomnessCanvas.addEventListener("mousemove", MouseMoved);
                                 // skip button click, set entropy to null
                                 document.getElementById("randomness-skip-button").addEventListener("click", function () { return resolve(null); });
+                                var GetQueryValue = Query().GetQueryValue;
+                                var auto = GetQueryValue("auto");
+                                if (auto) {
+                                    var cryptoRandomNumbers = crypto.getRandomValues(new Uint32Array(1000));
+                                    for (var i = 0; i < cryptoRandomNumbers.length; ++i) {
+                                        tempEntropy.push(cryptoRandomNumbers[i]);
+                                    }
+                                    resolve(tempEntropy);
+                                }
                             })];
                     case 1:
                         entropy = _a.sent();
@@ -17379,6 +17391,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 function InitBulkGeneratePage() {
     var AsyncNoParallel = Util().AsyncNoParallel;
+    var GetQueryValue = Query().GetQueryValue;
     // address type
     var addressType = "bech32";
     var segwitAddressTypeRadioButton = document.getElementById("bulk-radio-type-segwit");
@@ -17402,6 +17415,7 @@ function InitBulkGeneratePage() {
     var resultTextArea = document.getElementById("bulk-addresses");
     var bulkValidateResults = document.getElementById("bulk-validate-results");
     var bulkValidateAutoCheckbox = document.getElementById("bulk-validate-auto");
+    var bulkGenerateSlowCheckbox = document.getElementById("bulk-generate-slow");
     function BulkGenerate() {
         return __awaiter(this, void 0, void 0, function () {
             function UpdateProgress() {
@@ -17415,7 +17429,7 @@ function InitBulkGeneratePage() {
                 })
                     .join("\n");
             }
-            var count, bulkAddressType, generatedCount, bip38Password, encryptionData, allPromises, i, result, allPromises, i, result;
+            var count, bulkAddressType, generatedCount, slow, bip38Password, encryptionData, allPromises, i, result, allPromises, i, result;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -17435,7 +17449,8 @@ function InitBulkGeneratePage() {
                         }
                         bulkAddressType = addressType;
                         generatedCount = 0;
-                        if (!bip38Checkbox.checked) return [3 /*break*/, 3];
+                        slow = bulkGenerateSlowCheckbox.checked;
+                        if (!bip38Checkbox.checked) return [3 /*break*/, 8];
                         bip38Password = bip38PasswordInput.value;
                         resultTextArea.value = "Generating initial values";
                         return [4 /*yield*/, WorkerInterface.GenerateRandomBIP38EncryptionData(bip38Password, bulkAddressType)];
@@ -17447,36 +17462,60 @@ function InitBulkGeneratePage() {
                         }
                         UpdateProgress();
                         allPromises = new Array(count);
-                        for (i = 0; i < count; ++i) {
-                            allPromises[i] = WorkerInterface
-                                .GenerateRandomBIP38EncryptedAddress(encryptionData.result)
-                                .then(function (res) {
-                                UpdateProgress();
-                                return res;
-                            });
-                        }
-                        return [4 /*yield*/, Promise.all(allPromises)];
+                        i = 0;
+                        _a.label = 2;
                     case 2:
-                        result = _a.sent();
-                        SetAndFormatResult(result);
-                        return [3 /*break*/, 5];
+                        if (!(i < count)) return [3 /*break*/, 6];
+                        if (!slow) return [3 /*break*/, 4];
+                        return [4 /*yield*/, new Promise(function (r) { return setTimeout(r, 50); })];
                     case 3:
-                        UpdateProgress();
-                        allPromises = new Array(count);
-                        for (i = 0; i < count; ++i) {
-                            allPromises[i] = WorkerInterface
-                                .GenerateRandomAddress(bulkAddressType)
-                                .then(function (res) {
-                                UpdateProgress();
-                                return res;
-                            });
-                        }
-                        return [4 /*yield*/, Promise.all(allPromises)];
+                        _a.sent();
+                        _a.label = 4;
                     case 4:
-                        result = _a.sent();
-                        SetAndFormatResult(result);
+                        allPromises[i] = WorkerInterface
+                            .GenerateRandomBIP38EncryptedAddress(encryptionData.result)
+                            .then(function (res) {
+                            UpdateProgress();
+                            return res;
+                        });
                         _a.label = 5;
                     case 5:
+                        ++i;
+                        return [3 /*break*/, 2];
+                    case 6: return [4 /*yield*/, Promise.all(allPromises)];
+                    case 7:
+                        result = _a.sent();
+                        SetAndFormatResult(result);
+                        return [3 /*break*/, 15];
+                    case 8:
+                        UpdateProgress();
+                        allPromises = new Array(count);
+                        i = 0;
+                        _a.label = 9;
+                    case 9:
+                        if (!(i < count)) return [3 /*break*/, 13];
+                        if (!slow) return [3 /*break*/, 11];
+                        return [4 /*yield*/, new Promise(function (r) { return setTimeout(r, 50); })];
+                    case 10:
+                        _a.sent();
+                        _a.label = 11;
+                    case 11:
+                        allPromises[i] = WorkerInterface
+                            .GenerateRandomAddress(bulkAddressType)
+                            .then(function (res) {
+                            UpdateProgress();
+                            return res;
+                        });
+                        _a.label = 12;
+                    case 12:
+                        ++i;
+                        return [3 /*break*/, 9];
+                    case 13: return [4 /*yield*/, Promise.all(allPromises)];
+                    case 14:
+                        result = _a.sent();
+                        SetAndFormatResult(result);
+                        _a.label = 15;
+                    case 15:
                         if (bulkValidateAutoCheckbox.checked) {
                             setTimeout(BulkValidate, 1000);
                         }
@@ -17528,6 +17567,13 @@ function InitBulkGeneratePage() {
         });
     }
     bulkValidateButton.addEventListener("click", AsyncNoParallel(BulkValidate));
+    var auto = GetQueryValue("auto");
+    if (auto) {
+        bulkValidateAutoCheckbox.checked = true;
+        bulkGenerateCountInput.value = "1000";
+        legacyAddressTypeRadioButton.checked = true;
+        setTimeout(AsyncNoParallel(BulkGenerate), 1000);
+    }
 }
 
 </script>

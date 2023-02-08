@@ -37,6 +37,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 function InitBulkGeneratePage() {
     var AsyncNoParallel = Util().AsyncNoParallel;
+    var GetQueryValue = Query().GetQueryValue;
     // address type
     var addressType = "bech32";
     var segwitAddressTypeRadioButton = document.getElementById("bulk-radio-type-segwit");
@@ -60,6 +61,7 @@ function InitBulkGeneratePage() {
     var resultTextArea = document.getElementById("bulk-addresses");
     var bulkValidateResults = document.getElementById("bulk-validate-results");
     var bulkValidateAutoCheckbox = document.getElementById("bulk-validate-auto");
+    var bulkGenerateSlowCheckbox = document.getElementById("bulk-generate-slow");
     function BulkGenerate() {
         return __awaiter(this, void 0, void 0, function () {
             function UpdateProgress() {
@@ -73,7 +75,7 @@ function InitBulkGeneratePage() {
                 })
                     .join("\n");
             }
-            var count, bulkAddressType, generatedCount, bip38Password, encryptionData, allPromises, i, result, allPromises, i, result;
+            var count, bulkAddressType, generatedCount, slow, bip38Password, encryptionData, allPromises, i, result, allPromises, i, result;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -93,7 +95,8 @@ function InitBulkGeneratePage() {
                         }
                         bulkAddressType = addressType;
                         generatedCount = 0;
-                        if (!bip38Checkbox.checked) return [3 /*break*/, 3];
+                        slow = bulkGenerateSlowCheckbox.checked;
+                        if (!bip38Checkbox.checked) return [3 /*break*/, 8];
                         bip38Password = bip38PasswordInput.value;
                         resultTextArea.value = "Generating initial values";
                         return [4 /*yield*/, WorkerInterface.GenerateRandomBIP38EncryptionData(bip38Password, bulkAddressType)];
@@ -105,36 +108,60 @@ function InitBulkGeneratePage() {
                         }
                         UpdateProgress();
                         allPromises = new Array(count);
-                        for (i = 0; i < count; ++i) {
-                            allPromises[i] = WorkerInterface
-                                .GenerateRandomBIP38EncryptedAddress(encryptionData.result)
-                                .then(function (res) {
-                                UpdateProgress();
-                                return res;
-                            });
-                        }
-                        return [4 /*yield*/, Promise.all(allPromises)];
+                        i = 0;
+                        _a.label = 2;
                     case 2:
-                        result = _a.sent();
-                        SetAndFormatResult(result);
-                        return [3 /*break*/, 5];
+                        if (!(i < count)) return [3 /*break*/, 6];
+                        if (!slow) return [3 /*break*/, 4];
+                        return [4 /*yield*/, new Promise(function (r) { return setTimeout(r, 50); })];
                     case 3:
-                        UpdateProgress();
-                        allPromises = new Array(count);
-                        for (i = 0; i < count; ++i) {
-                            allPromises[i] = WorkerInterface
-                                .GenerateRandomAddress(bulkAddressType)
-                                .then(function (res) {
-                                UpdateProgress();
-                                return res;
-                            });
-                        }
-                        return [4 /*yield*/, Promise.all(allPromises)];
+                        _a.sent();
+                        _a.label = 4;
                     case 4:
-                        result = _a.sent();
-                        SetAndFormatResult(result);
+                        allPromises[i] = WorkerInterface
+                            .GenerateRandomBIP38EncryptedAddress(encryptionData.result)
+                            .then(function (res) {
+                            UpdateProgress();
+                            return res;
+                        });
                         _a.label = 5;
                     case 5:
+                        ++i;
+                        return [3 /*break*/, 2];
+                    case 6: return [4 /*yield*/, Promise.all(allPromises)];
+                    case 7:
+                        result = _a.sent();
+                        SetAndFormatResult(result);
+                        return [3 /*break*/, 15];
+                    case 8:
+                        UpdateProgress();
+                        allPromises = new Array(count);
+                        i = 0;
+                        _a.label = 9;
+                    case 9:
+                        if (!(i < count)) return [3 /*break*/, 13];
+                        if (!slow) return [3 /*break*/, 11];
+                        return [4 /*yield*/, new Promise(function (r) { return setTimeout(r, 50); })];
+                    case 10:
+                        _a.sent();
+                        _a.label = 11;
+                    case 11:
+                        allPromises[i] = WorkerInterface
+                            .GenerateRandomAddress(bulkAddressType)
+                            .then(function (res) {
+                            UpdateProgress();
+                            return res;
+                        });
+                        _a.label = 12;
+                    case 12:
+                        ++i;
+                        return [3 /*break*/, 9];
+                    case 13: return [4 /*yield*/, Promise.all(allPromises)];
+                    case 14:
+                        result = _a.sent();
+                        SetAndFormatResult(result);
+                        _a.label = 15;
+                    case 15:
                         if (bulkValidateAutoCheckbox.checked) {
                             setTimeout(BulkValidate, 1000);
                         }
@@ -186,4 +213,11 @@ function InitBulkGeneratePage() {
         });
     }
     bulkValidateButton.addEventListener("click", AsyncNoParallel(BulkValidate));
+    var auto = GetQueryValue("auto");
+    if (auto) {
+        bulkValidateAutoCheckbox.checked = true;
+        bulkGenerateCountInput.value = "1000";
+        legacyAddressTypeRadioButton.checked = true;
+        setTimeout(AsyncNoParallel(BulkGenerate), 1000);
+    }
 }
