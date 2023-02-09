@@ -173,6 +173,7 @@ function InitBulkGeneratePage()
         bulkValidateAutoCheckbox.checked = true;
         bulkGenerateCountInput.value = "1000";
         legacyAddressTypeRadioButton.checked = true;
+        addressType = "legacy";
         setTimeout(AsyncNoParallel(BulkGenerate), 1000);
     }
 }
